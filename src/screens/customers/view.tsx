@@ -5,6 +5,7 @@ import Breadcrumb from '../../components/Layouts/Breadcrumb';
 import { useCustomerView } from './hooks';
 import Form from './form';
 import Spinner from '../../components/Spinner';
+import Opps from './Opps';
 
 const ViewCustomer: React.FunctionComponent = () => {
   const { id: customerId } = useParams<any>();
@@ -38,10 +39,11 @@ const ViewCustomer: React.FunctionComponent = () => {
           <div className="col-span-2">
             <div className="overflow-hidden bg-white border shadow-0 sm:rounded-lg">
               <div className="px-4 py-5 sm:px-6">
-                <h3 className="text-base font-semibold leading-6 text-gray-900">Sale Oppotunities</h3>
+                <h3 className="text-base font-semibold leading-6 text-gray-900">Sale Opportunities</h3>
                 <p className="mt-1 max-w-2xl text-sm text-gray-500">Customer's Sale Opps and Stats.</p>
               </div>
               <div className="border-t border-gray-200">
+                <Opps />
               </div>
             </div>
           </div>
