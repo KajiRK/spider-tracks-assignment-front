@@ -7,6 +7,7 @@ export interface ICustomer {
     mobile?: string;
     email: string;
     status: string;
+    opps: [];
 }
 
 export const loadCustomers = async () => {
@@ -30,7 +31,8 @@ export const getCustomer = async (id?: string) => {
         name: customer.name,
         mobile: customer.mobile,
         email: customer.email,
-        status: customer.status
+        status: customer.status,
+        opps: customer.opps
     };
     return customerData;
 };
@@ -43,7 +45,8 @@ export const updateCustomer = async (id: string, data: any) => {
         name: customer.name,
         mobile: customer.mobile,
         email: customer.email,
-        status: customer.status
+        status: customer.status,
+        opps: customer.opps
     };
     return {resData, message};
 };

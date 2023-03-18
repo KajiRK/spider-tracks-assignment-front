@@ -43,7 +43,7 @@ const ViewCustomer: React.FunctionComponent = () => {
                 <p className="mt-1 max-w-2xl text-sm text-gray-500">Customer's Sale Opps and Stats.</p>
               </div>
               <div className="border-t border-gray-200">
-                <Opps />
+                <Opps opps={customer?.opps} customer={customer} />
               </div>
             </div>
           </div>
