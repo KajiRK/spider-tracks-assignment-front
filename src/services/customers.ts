@@ -35,3 +35,16 @@ export const getCustomer = async (id?: string) => {
     return customerData;
 };
 
+export const updateCustomer = async (id: string, data: any) => {
+    const { data: customer } = await axios.put(`/customers/${id}`, data);
+    const customerData = {
+        id: customer._id,
+        code: customer.code,
+        name: customer.name,
+        mobile: customer.mobile,
+        email: customer.email,
+        status: customer.status
+    };
+    return customerData;
+};
+

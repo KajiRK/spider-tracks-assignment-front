@@ -2,11 +2,11 @@ import * as React from 'react';
 import Footer from './Footer';
 import Header from './Header';
 
-interface IMainLayoutProps {
+interface IAppLayoutProps {
     children?: any;
 }
 
-const MainLayout: React.FunctionComponent<IMainLayoutProps> = ({children}: IMainLayoutProps) => {
+const AppLayout: React.FunctionComponent<IAppLayoutProps> = ({children}: IAppLayoutProps) => {
   return (
     <>
       <Header />
@@ -16,4 +16,4 @@ const MainLayout: React.FunctionComponent<IMainLayoutProps> = ({children}: IMain
   );
 };
 
-export default MainLayout;
+export default AppLayout;

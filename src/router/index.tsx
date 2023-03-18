@@ -1,25 +1,12 @@
 import * as React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import MainLayout from '../components/layouts/Main';
-import Customers from "../screens/customers";
-import ViewCustomer from "../screens/customers/view";
-
-export const appRoutes = createBrowserRouter([
-    {
-        path: "/",
-        element: <Customers/>
-    },
-    {
-        path: "/customers/:id",
-        element: <ViewCustomer/>
-    }
-]);
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes';
 
 const Router: React.FC = () => {
   return (
-    <MainLayout>
-        <RouterProvider router={appRoutes} />
-    </MainLayout>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 };
 
