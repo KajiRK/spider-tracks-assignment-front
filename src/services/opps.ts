@@ -1,7 +1,7 @@
 import axios from '../config/axios';
 
 export interface IOpp {
-    id: string;
+    _id: string;
     name: string;
     status: string;
 }

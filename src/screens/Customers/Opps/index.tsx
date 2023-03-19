@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Form from './form';
+import { IOpps } from './types';
 
 interface IOppsProps {
-  opps: any;
+  opps?: IOpps[];
   customer: any;
 }
 

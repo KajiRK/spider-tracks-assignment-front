@@ -4,10 +4,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Table from './table';
 import { createOpp } from '../../../services/opps';
+import { IOpps } from './types';
+import { ICustomer } from '../../../services/customers';
 
 interface IOppFormProps {
-    opps: any
-    customer: any
+    opps?: IOpps[];
+    customer: ICustomer;
 }
 
 const OppForm: React.FunctionComponent<IOppFormProps> = (props) => {
@@ -18,7 +20,7 @@ const OppForm: React.FunctionComponent<IOppFormProps> = (props) => {
         status: yup.string().required('Status field is required')
     }).required();
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
             name: '',
@@ -30,6 +32,7 @@ const OppForm: React.FunctionComponent<IOppFormProps> = (props) => {
         console.log(data);
         const {resData} = await createOpp(props.customer?.id, data);
         setOppData([...oppData, resData]);
+        reset();
     };
 
     return (
@@ -65,9 +68,9 @@ const OppForm: React.FunctionComponent<IOppFormProps> = (props) => {
                             Add Opp
                         </button>
                     </div>
-                    </div>
-                </form>
-                <Table opps={oppData} />
+                </div>
+            </form>
+            <Table opps={oppData} setOppData={setOppData} />
         </>
     );
 };
