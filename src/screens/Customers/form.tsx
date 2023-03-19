@@ -46,7 +46,7 @@ const Form: React.FunctionComponent<IForm> = ({
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="overflow-hidden shadow sm:rounded-md">
-                    <div className="bg-white px-4 py-5 sm:p-6">
+                    <div className="bg-white px-6 py-2">
                         <div className="grid grid-cols-6 gap-6">
                             <div className="col-span-6">
                                 <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">

@@ -8,6 +8,7 @@ export interface ICustomer {
     email: string;
     status: string;
     opps: [];
+    created_at: string;
 }
 
 export const loadCustomers = async () => {
@@ -32,7 +33,8 @@ export const getCustomer = async (id?: string) => {
         mobile: customer.mobile,
         email: customer.email,
         status: customer.status,
-        opps: customer.opps
+        opps: customer.opps,
+        created_at:customer.createdAt
     };
     return customerData;
 };
@@ -46,7 +48,8 @@ export const updateCustomer = async (id: string, data: any) => {
         mobile: customer.mobile,
         email: customer.email,
         status: customer.status,
-        opps: customer.opps
+        opps: customer.opps,
+        created_at:customer.createdAt
     };
     return {resData, message};
 };
@@ -60,7 +63,8 @@ export const updateCustomerStatus = async (id: string, data: any) => {
         mobile: customer.mobile,
         email: customer.email,
         status: customer.status,
-        opps: customer.opps
+        opps: customer.opps,
+        created_at:customer.createdAt
     };
     return {resData, message};
 };

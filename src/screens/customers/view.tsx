@@ -7,6 +7,7 @@ import Form from './form';
 import Spinner from '../../components/Spinner';
 import Opps from './Opps';
 import Status from './status';
+import moment from 'moment';
 
 const ViewCustomer: React.FunctionComponent = () => {
   const { id: customerId } = useParams<any>();
@@ -44,6 +45,7 @@ const ViewCustomer: React.FunctionComponent = () => {
                 
               </div>
               <div className="border-t border-gray-200">
+                <div className="px-6 py-2"><span className="text-gray-400 text-sm">{customer?.created_at ? `Created on ${moment(customer?.created_at).format('LL')}` : ''}</span></div>
                 <Form customer={customer} />
               </div>
             </div>
@@ -53,7 +55,7 @@ const ViewCustomer: React.FunctionComponent = () => {
             <div className="overflow-hidden bg-white border shadow-0 sm:rounded-lg">
               <div className="px-4 py-5 sm:px-6">
                 <h3 className="text-base font-semibold leading-6 text-gray-900">Sale Opportunities</h3>
-                <p className="mt-1 max-w-2xl text-sm text-gray-500">Customer's Sale Opps and Stats.</p>
+                <p className="mt-1 max-w-2xl text-sm text-gray-500">Customer's Sale Opportunities and Stats.</p>
               </div>
               <div className="border-t border-gray-200">
                 <Opps opps={customer?.opps} customer={customer} />
