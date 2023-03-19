@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { IOpp, updateOpp } from '../../../services/opps';
-import { IOpps } from './types';
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Link } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import { IOpps } from './types';
 import { ICustomer } from '../../../services/customers';
+import { IOpp, updateOpp } from '../../../services/opps';
 
 interface IEditProps {
     opps: IOpps[];
@@ -18,11 +18,13 @@ const Edit: React.FunctionComponent<IEditProps> = (props) => {
     const [parentOppData, setParentOppData] = React.useState<any>(props.opps);
     const [showModal, setShowModal] = React.useState(false);
 
+    // form validation
     const schema = yup.object({
         name: yup.string().required('Name field is required'),
         status: yup.string().required('Status field is required')
     }).required();
 
+    // validation schema resolver and set default values
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
@@ -33,13 +35,18 @@ const Edit: React.FunctionComponent<IEditProps> = (props) => {
     });
 
     const onSubmit = async (data: any) => {
+        // service to update opp
         const {resData} = await updateOpp(props.customer.id, props.opp._id, data);
+
+        // process updated opp to refresh parent opps state
         const updatedOpps = parentOppData.map((oppItem: any) => {
             if(resData.id == oppItem._id){
                 return {...oppItem, name: data.name, status: data.status}
             }
             return oppItem;
         });
+
+        // refresh parent state with updated opp details
         props.setOppData(updatedOpps);
         setShowModal(false);
     };

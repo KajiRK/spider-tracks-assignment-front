@@ -1,9 +1,9 @@
 import * as React from 'react';
+import * as yup from "yup";
+import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-import classnames from 'classnames';
 import { updateCustomerStatus } from '../../services/customers';
 
 interface IStatusProps {
@@ -14,10 +14,12 @@ interface IStatusProps {
 const Status: React.FunctionComponent<IStatusProps> = (props) => {
     const [showModal, setShowModal] = React.useState(false);
 
+    // form validation
     const schema = yup.object({
         status: yup.string().required('Status field is required')
     }).required();
 
+    // validation schema resolver and set default values
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
@@ -26,7 +28,9 @@ const Status: React.FunctionComponent<IStatusProps> = (props) => {
     });
 
     const onSubmit = async (data: any) => {
+        // service to update customer status
         await updateCustomerStatus(props.customer.id, data);
+        // refresh parent status state 
         props.setStatus(data.status);
         setShowModal(false);
     };

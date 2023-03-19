@@ -1,9 +1,9 @@
 import * as React from 'react';
+import * as yup from "yup";
 import { Link } from 'react-router-dom';
-import { IForm } from './types';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import { IForm } from './types';
 import { ICustomer, updateCustomer } from '../../services/customers';
 
 const Form: React.FunctionComponent<IForm> = ({
@@ -13,12 +13,14 @@ const Form: React.FunctionComponent<IForm> = ({
     const [message, setMessage] =  React.useState<string>('');
     const [showMessage, setShowMessage] = React.useState(false);
 
+    // form validation
     const schema = yup.object({
         name: yup.string().required('Name field is required'),
         email: yup.string().required('Email field is required').email('Invalid email'),
         mobile: yup.string().nullable()
     }).required();
 
+    // validation schema resolver and set default values
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
@@ -29,14 +31,22 @@ const Form: React.FunctionComponent<IForm> = ({
     });
 
     const onSubmit = async (data: any) => {
-        console.log(data);
         if(!customerData?.id){
             return;
         }
+        // service to update customer data
         const {resData, message} = await updateCustomer(customerData?.id, data);
+
+        // refresh state with updated customer data
         setCustomerData(resData);
+
+        // update message that received from service
         setMessage(message);
+
+        // make message visble 
         setShowMessage(true);
+
+        // auto hide message after setTimeout
         setTimeout(function() {
             setShowMessage(false);
         }, 2000);

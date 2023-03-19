@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import Breadcrumb from '../../components/Layouts/Breadcrumb';
-import { useCustomers } from './hooks';
 import Spinner from '../../components/Spinner';
+import Breadcrumb from '../../components/Layouts/Breadcrumb';
 import { ICustomer } from '../../services/customers';
+import { useCustomers } from './hooks';
 
 const Customers: React.FunctionComponent = () => {
   const [loadCustomers, setLoadCustomers] = React.useState<ICustomer[]>();

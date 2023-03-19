@@ -1,15 +1,11 @@
 import * as React from 'react';
 import { Disclosure } from '@headlessui/react';
-import { useLocation } from 'react-router-dom';
 
 interface IBreadcrumbProps {
     crumb: string
 }
 
 const Breadcrumb: React.FunctionComponent<IBreadcrumbProps> = (props) => {
-  let location = useLocation();
-  console.log(location, 'location===>');
-
   return (
     <Disclosure as="footer" className="bg-gray-300 w-full">
       <div className="mx-auto max-w-7xl px-2">

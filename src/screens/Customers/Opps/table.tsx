@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ICustomer } from '../../../services/customers';
+import classnames from 'classnames';
 import Edit from './edit';
 import { IOpps } from './types';
-import classnames from 'classnames';
+import { ICustomer } from '../../../services/customers';
 
 interface IOppTableProps {
     opps: IOpps[];

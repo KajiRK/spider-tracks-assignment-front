@@ -1,6 +1,6 @@
 # Spider Tracks Assignment - Front Application
 
- Front application developed using ReactJs with TypeScript template.
+ Front application developed using ReactJs with TypeScript template and Tailwindcss for styling UIs.
 
 ## .env Values
 

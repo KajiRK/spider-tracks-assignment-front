@@ -1,10 +1,10 @@
 import * as React from 'react';
+import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
 import Table from './table';
-import { createOpp } from '../../../services/opps';
 import { IOpps } from './types';
+import { createOpp } from '../../../services/opps';
 import { ICustomer } from '../../../services/customers';
 
 interface IOppFormProps {
@@ -15,11 +15,13 @@ interface IOppFormProps {
 const OppForm: React.FunctionComponent<IOppFormProps> = (props) => {
     const [oppData, setOppData] = React.useState<any>(props.opps);
 
+    // form validation
     const schema = yup.object({
         name: yup.string().required('Name field is required'),
         status: yup.string().required('Status field is required')
     }).required();
 
+    // validation schema resolver and set default values
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
@@ -29,9 +31,13 @@ const OppForm: React.FunctionComponent<IOppFormProps> = (props) => {
     });
 
     const onSubmit = async (data: any) => {
-        console.log(data);
+        // service to create opp against to customer
         const {resData} = await createOpp(props.customer?.id, data);
+        
+        // refresh opp state with newly create opp
         setOppData([...oppData, resData]);
+
+        // reset form elements
         reset();
     };
 

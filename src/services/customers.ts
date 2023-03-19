@@ -11,6 +11,7 @@ export interface ICustomer {
     created_at: string;
 }
 
+// service to load customers
 export const loadCustomers = async () => {
     const { data: customers } = await axios.get('/customers');
     const customersList = await customers.map((customerItem: any) => ({
@@ -24,6 +25,7 @@ export const loadCustomers = async () => {
     return customersList;
 };
 
+// service to get a specific customer data
 export const getCustomer = async (id?: string) => {
     const { data: customer } = await axios.get(`/customers/${id}`);
     const customerData = {
@@ -39,6 +41,7 @@ export const getCustomer = async (id?: string) => {
     return customerData;
 };
 
+// service to update customer data 
 export const updateCustomer = async (id: string, data: any) => {
     const { data: {data: customer, message} } = await axios.put(`/customers/${id}`, data);
     const resData = {
@@ -54,6 +57,7 @@ export const updateCustomer = async (id: string, data: any) => {
     return {resData, message};
 };
 
+// service to update only customer status
 export const updateCustomerStatus = async (id: string, data: any) => {
     const { data: {data: customer, message} } = await axios.patch(`/customers/${id}/status`, data);
     const resData = {

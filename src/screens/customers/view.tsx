@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
+import moment from 'moment';
 import classnames from 'classnames';
+import { useParams } from 'react-router-dom';
+import Spinner from '../../components/Spinner';
 import Breadcrumb from '../../components/Layouts/Breadcrumb';
 import { useCustomerView } from './hooks';
 import Form from './form';
-import Spinner from '../../components/Spinner';
 import Opps from './Opps';
 import Status from './status';
-import moment from 'moment';
 
 const ViewCustomer: React.FunctionComponent = () => {
   const { id: customerId } = useParams<any>();
@@ -25,7 +25,7 @@ const ViewCustomer: React.FunctionComponent = () => {
       <Breadcrumb crumb='Customer Details' />
       <div className="mt-4 flex flex-col mx-auto max-w-7xl">
         <div className="grid grid-cols-3 gap-4">
-          {/* customer details & update */}
+          {/* Customer details with update form, and status update process */}
           <div>
             <div className="overflow-hidden bg-white border shadow-0 sm:rounded-lg">
               <div className="px-4 py-5 sm:px-6">
@@ -50,7 +50,7 @@ const ViewCustomer: React.FunctionComponent = () => {
               </div>
             </div>
           </div>
-          {/* Stats & List of Customer Opps */}
+          {/* List of Customer Opps & Create Opp & Update*/}
           <div className="col-span-2">
             <div className="overflow-hidden bg-white border shadow-0 sm:rounded-lg">
               <div className="px-4 py-5 sm:px-6">
