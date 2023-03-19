@@ -19,8 +19,6 @@ const ViewCustomer: React.FunctionComponent = () => {
     );
   }
 
-  console.log(status, 'status==>');
-
   return (
     <>
       <Breadcrumb crumb='Customer Details' />
