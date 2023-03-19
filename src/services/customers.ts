@@ -51,3 +51,17 @@ export const updateCustomer = async (id: string, data: any) => {
     return {resData, message};
 };
 
+export const updateCustomerStatus = async (id: string, data: any) => {
+    const { data: {data: customer, message} } = await axios.patch(`/customers/${id}/status`, data);
+    const resData = {
+        id: customer._id,
+        code: customer.code,
+        name: customer.name,
+        mobile: customer.mobile,
+        email: customer.email,
+        status: customer.status,
+        opps: customer.opps
+    };
+    return {resData, message};
+};
+

@@ -6,16 +6,20 @@ import { useCustomerView } from './hooks';
 import Form from './form';
 import Spinner from '../../components/Spinner';
 import Opps from './Opps';
+import Status from './status';
 
 const ViewCustomer: React.FunctionComponent = () => {
   const { id: customerId } = useParams<any>();
   const{ customer, loading } = useCustomerView(customerId);
+  const [status, setStatus] = React.useState<string>();
 
   if (loading) {
     return (
       <Spinner />
     );
   }
+
+  console.log(status, 'status==>');
 
   return (
     <>
@@ -26,9 +30,20 @@ const ViewCustomer: React.FunctionComponent = () => {
           <div>
             <div className="overflow-hidden bg-white border shadow-0 sm:rounded-lg">
               <div className="px-4 py-5 sm:px-6">
-                <h3 className="text-base font-semibold leading-6 text-gray-900">Customer Information | <span className={classnames('font-medium', customer?.status === 'Lead' ? 'text-yellow-600' : customer?.status === 'Non-Active' ? 'text-red-600' : 'text-green-600')}>{customer?.status}</span>
+                <h3 className="text-base font-semibold leading-6 text-gray-900">Customer Information | 
+                  { status ? ( 
+                      <span className={classnames('font-medium', status === 'Lead' ? 'text-yellow-600' : status === 'Non-Active' ? 'text-red-600' : 'text-green-600')}> {status}</span>   
+                  ) : (
+                    <span className={classnames('font-medium', customer?.status === 'Lead' ? 'text-yellow-600' : customer?.status === 'Non-Active' ? 'text-red-600' : 'text-green-600')}> {customer?.status}</span>
+                  )}
                 </h3>
-                <p className="mt-1 max-w-2xl text-sm text-gray-500">Change Values and Click On Update.</p>
+                <div className='flex items-center justify-between'>
+                  <p className="mt-1 max-w-2xl text-sm text-gray-500">Change Values and Click On Update.</p>
+                  <div>
+                    <Status customer={customer} setStatus={setStatus} />
+                  </div>
+                </div>
+                
               </div>
               <div className="border-t border-gray-200">
                 <Form customer={customer} />
