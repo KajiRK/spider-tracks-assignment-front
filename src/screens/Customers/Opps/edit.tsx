@@ -58,7 +58,6 @@ const Edit: React.FunctionComponent<IEditProps> = (props) => {
                                         <h3 className="text-base font-semibold leading-6 text-gray-900">Update Opportunity</h3>
                                         <p className="mt-1 max-w-2xl text-sm text-gray-500">Change Name or Status and click on Update.</p>
                                     </div>
-
                                     {/*body*/}
                                     <div className="border-t border-gray-200">
                                         <div className="bg-white px-4 py-5 sm:p-6">
@@ -84,7 +83,6 @@ const Edit: React.FunctionComponent<IEditProps> = (props) => {
                                             </div>
                                         </div>
                                     </div>
-
                                     {/*footer*/}
                                     <div className="bg-gray-100 px-4 py-3 relative flex h-16 items-center justify-between sm:px-6">
                                         <button
