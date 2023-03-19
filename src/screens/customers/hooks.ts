@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCustomer, ICustomer, loadCustomers, updateCustomer } from '../../services/customers';
+import { getCustomer, ICustomer, loadCustomers } from '../../services/customers';
 import { ICustomerHook, ICustomerViewHook } from './types';
 
 export const useCustomers = (): ICustomerHook => {

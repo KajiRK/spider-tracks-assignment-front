@@ -16,3 +16,13 @@ export const createOpp = async (id: string, data: any) => {
     return {resData, message};
 };
 
+export const updateOpp = async (id?: string, oppId?: string, data?: any) => {
+    const { data: opp } = await axios.put(`/customers/${id}/opps/${oppId}`, data);
+    const resData = {
+        id: opp._id,
+        name: opp.name,
+        status: opp.status
+    };
+    return {resData};
+};
+

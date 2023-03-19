@@ -70,7 +70,7 @@ const OppForm: React.FunctionComponent<IOppFormProps> = (props) => {
                     </div>
                 </div>
             </form>
-            <Table opps={oppData} setOppData={setOppData} />
+            <Table opps={oppData} setOppData={setOppData} customer={props.customer} />
         </>
     );
 };

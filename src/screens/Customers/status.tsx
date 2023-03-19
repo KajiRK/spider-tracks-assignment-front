@@ -1,52 +1,48 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { IOpp, updateOpp } from '../../../services/opps';
-import { IOpps } from './types';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { ICustomer } from '../../../services/customers';
 
-interface IEditProps {
-    opps: IOpps[];
-    opp: IOpp;
-    setOppData: any;
-    customer: ICustomer;
+interface IStatusProps {
+    customer?: any;
+    setCustomerData: any;
 }
 
-const Edit: React.FunctionComponent<IEditProps> = (props) => {
-    const [parentOppData, setParentOppData] = React.useState<any>(props.opps);
+const Status: React.FunctionComponent<IStatusProps> = (props) => {
+
     const [showModal, setShowModal] = React.useState(false);
 
     const schema = yup.object({
-        name: yup.string().required('Name field is required'),
         status: yup.string().required('Status field is required')
     }).required();
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
-            id: props.opp._id,
-            name: props.opp.name,
-            status: props.opp.status
+            status: props.customer.status
         }
     });
 
     const onSubmit = async (data: any) => {
-        const {resData} = await updateOpp(props.customer.id, props.opp._id, data);
-        const updatedOpps = parentOppData.map((oppItem: any) => {
-            if(resData.id == oppItem._id){
-                return {...oppItem, name: data.name, status: data.status}
-            }
-            return oppItem;
-        });
-        props.setOppData(updatedOpps);
+        
+       
         setShowModal(false);
     };
 
     return (
         <>
-            <Link to='' className="text-blue-500" onClick={() => setShowModal(true)}>{props.opp.name}</Link>
+            <Link 
+                to='' 
+                className="inline-flex justify-center rounded-md bg-yellow-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" 
+                onClick={() => setShowModal(true)}
+                >
+                    <svg className="-ml-0.5 mr-1.5 h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3"></path>
+                    </svg>
+
+                    Change Status
+            </Link>
             {showModal ? (
                 <>
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -61,28 +57,7 @@ const Edit: React.FunctionComponent<IEditProps> = (props) => {
 
                                     {/*body*/}
                                     <div className="border-t border-gray-200">
-                                        <div className="bg-white px-4 py-5 sm:p-6">
-                                            <div className="grid grid-cols-6 gap-6">
-                                            <div className="col-span-4 sm:col-span-4">
-                                                <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
-                                                    Opportunity Name
-                                                </label>
-                                                <input {...register("id")} type="hidden" placeholder="opportunity name" className="form-input mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                                <input {...register("name")} placeholder="opportunity name" className="form-input mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                                <p className="text-red-600 text-sm mt-2">{errors.name?.message}</p>
-                                            </div>
-
-                                            <div className="col-span-2 sm:col-span-2">
-                                                <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">Stats</label>
-                                                <select {...register("status")} className="form-select mt-2 block w-full rounded-md border-0 bg-white py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                                    <option>New</option>
-                                                    <option>Closed Won</option>
-                                                    <option>Closed Lost</option>
-                                                </select>
-                                                <p className="text-red-600 text-sm mt-2">{errors.status?.message}</p>
-                                            </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
 
                                     {/*footer*/}
@@ -112,8 +87,10 @@ const Edit: React.FunctionComponent<IEditProps> = (props) => {
                     </form>
                 </>
             ) : null}
+            
+            
         </>
     );
 };
 
-export default Edit;
+export default Status;
